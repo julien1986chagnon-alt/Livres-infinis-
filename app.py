@@ -1,4 +1,6 @@
 import streamlit as st
+import json
+import os
 
 st.set_page_config(page_title="Écrire un livres", page_icon="∞", layout="centered")
 
@@ -11,13 +13,31 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-if "community_pages" not in st.session_state:
-    st.session_state.community_pages = []
+# --- GESTION DE LA BASE DE DONNÉES SÉCURISÉE ---
+DB_FILE = "infini_data.json"
 
+def charger_pages_communaute():
+    if os.path.exists(DB_FILE):
+        try:
+            with open(DB_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except:
+            return []
+    return []
+
+def sauvegarder_page_communaute(titre, auteur, texte):
+    pages = charger_pages_communaute()
+    pages.append({"titre": titre, "auteur": auteur, "texte": texte})
+    with open(DB_FILE, "w", encoding="utf-8") as f:
+        json.dump(pages, f, ensure_ascii=False, indent=4)
+
+pages_communaute = charger_pages_communaute()
+
+# --- VOS PAGES ORIGINALES ---
 PAGES_FIXES = {
     "Feuillet ∞ (La pluie inversée)": "Il est scientifiquement prouvé que les pingouins du Groenland ne portent jamais de chapeau haut-de-forme le mardi après-midi. C’est une question de dignité protocolaire. Barnabé, le grille-pain connecté de la cuisine du ministère des Affaires Étranges, l’avait pourtant bien spécifié dans sa note de service du 14 octobre. Mais personne ne l'écoute jamais, sous prétexte qu’il brûle systématiquement les tartines de seigle.\n\nCe matin-là, la pluie tombait de bas en haut, ce qui compliquait singulièrement l'usage des parapluies. Le Premier Ministre, un homme d'âge mûr entièrement constitué de nouilles de riz instantanées, prit une grande décision : il décréta que le bleu azur serait désormais interdit le long des trottoirs de plus de trois mètres. La foule, massée devant le perron en agitant des poireaux en signe de protestation, hurla au scandale. Un canard en plastique géant traversa la place en trottinette. C'était le signal que tout le monde",
     "Feuillet ∞ (La récolte)": "attendait pour commencer la grande récolte des boutons de manchette en caoutchouc.",
-    "Feuillet ∞ (L'Anomalie Alpha)": "Ce que le Premier Ministre en nouilles de riz ignorait, alors qu'il contemplait la foule et sa pluie inversée, c'est que son bureau n'était plus tout à fait en Angleterre. Les rapports scientifiques de l'Amirauté britannique avaient longtemps classé ce phénomène sous le code « Anomalie Alpha ». Dans le Triangle des Bermudes, la météo ne répond plus aux lois de Newton. L'océan ne reçoit pas l'eau du ciel ; c'est le ciel qui aspire l'Atlantique. Les gouttes de pluie naissent à la surface des vagues et fusent vers les nuages à une vitesse vertigineuse, créant des colonnes liquides ascendantes. C'est ce vortex de gravité inversée qui a saisi le HMS Vanguard d'Arthur Pan en 1782. Le navire n'a pas coulé : il a été soulevé par une pluie inversée, grimpant le long des gouttes d'eau jusqu'à franchir la membrane invisible qui sépare notre réalité du Pays Imaginaire. Quiconque traverse cette pluie de bas en haut cesse de vieillir, mais perd sa boussole à jamais.",
+    "Feuillet ∞ (L'Anomalie Alpha)": "Ce que le Premier Ministre en nouilles de riz ignorait, alors qu'il contemplait la foule et sa pluie inversée, c'est que son bureau n'était plus tout à fait en Angleterre. Les rapports scientifiques de l'Amirauté britannique avaient longtemps classé ce phénomène sous le code « Anomalie Alpha ». Dans le Triangle des Bermudes, la météo ne répond plus aux lois de Newton. L'océan ne reçoit pas l'eau du ciel ; c'est le ciel qui aspire l'Atlantique. Les gouttes de pluie naissent à la surface des vagues et fusent vers les nuages à une vitesse vertigineuse, créant des colonnes liquides ascendantes. C'est ce vortex de gravité inversée qui a saisi le HMS Vanguard d'Arthur Pan en 1782. Le navire n'a pas coulé : il a été soulevé par une pluie inversée, grimpant le long des gouttes d'eau jusqu'à franchir la membrane invisible qui sépare notre reality du Pays Imaginaire. Quiconque traverse cette pluie de bas en haut cesse de vieillir, mais perd sa boussole à jamais.",
     "Feuillet ∞ (Les cartes en feu)": "Pour comprendre la prolifération des pirates sur les rivages de Neverland, il faut regarder les cartes de l'Europe en feu. L'Angleterre de l'époque est une machine de guerre insatiable. Ses chantiers navals tournent à plein régime pour envoyer des flottes entières combattre aux Amériques ou piller les colonies espagnoles. Les vagues de l'Atlantique sont saturées de frégates, de galions et de bricks. Selon les archives secrètes de l'Amirauté britannique, entre 1750 et 1790, plus de quarante navires de ligne se sont volatilisés sans laisser la moindre planche de salut ni le moindre cadavre. Le Triangle des Bermudes fonctionnait comme un entonnoir invisible. Une brume trop épaisse, une boussole qui s'affole, et l'équipage basculait. On ne devenait pas pirate par choix ou par vocation romantique. On devenait pirate parce que le Triangle vous arrachait à votre vie, vous privait de boussole et vous jetait dans un monde sans fin où la Couronne d'Angleterre n'avait plus aucun pouvoir. Privés de patrie, les marins du roi troquaient leurs uniformes contre le pavillon noir.",
     "Feuillet ∞ (Le HMS Vanguard)": "Avant de devenir le fantôme du Pays Imaginaire, le père de Peter Pan était un homme de fer et de devoirs. Il s'appelait Arthur Pan, capitaine de premier rang dans la Marine Royale Anglaise. En 1782, son navire de guerre, le HMS Vanguard, quitta les côtes britanniques avant de s'évanouir corps et biens dans les eaux brumeuses du Triangle des Bermudes. L'Amirauté le déclara mort. En réalité, la tempête magnétique avait déchiré le tissu de la réalité, recrachant le navire et son équipage sur les rivages impossibles de Neverland.\n\nCoincé dans ce monde où le temps n'avait plus prise, Arthur Pan comprit vite que l'ordre militaire ne lui servirait plus à rien. Il troqua son uniforme contre la liberté crasseuse des flibustiers. Profitant de la faille géographique, il bâtit une taverne clandestine à la lisière des mondes, un lieu de débauche où les marins de toutes les époques venaient noyer leur exil. C'est là qu'il devint le quatrième capitaine. C'est là qu'il dépouilla Crochet de sa main et Silver de sa jambe, amassant une fortune colossale grâce à ses dés truqués.",
     "Feuillet ∞ (Le feutre vert)": "Le secret le mieux gardé de la piraterie tient sur le tapis de feutre vert d'une taverne clandestine. Ce soir-là, ils étaient quatre capitaines autour de la table, quatre tyrans des mers ivres de rhum et d'orgueil, décidés à miser ce qu'ils avaient de plus précieux. Ce ne fut pas un duel d'épées, mais un massacre de hasard.\n\nJames Crochet y laissa sa main gauche sur un double deux. Mais il ne fut pas le plus malheureux de la bande. À sa droite, le Capitaine Long John Silver joua sa jambe sur un coup de bluff magistral qui s'effondra face à un brelan d'as ; le couperet du tavernier fut aussi impitoyable pour son genou que pour le poignet de Crochet. À sa gauche, le troisième pirate, un fou sanguinaire dont l'histoire a oublié le nom, s'entêta à miser sa propre vie sur une dernière combinaison impossible. Il perdit sa tête dans la foule, son sang venant repeindre les pièces d'or qui s'entassaient au centre de la table.\n\nCar il y eut un vainqueur. Le quatrième capitaine, un homme discret au regard d'acier, ramassa l'intégralité du butin : une immense somme d'argent, des coffres de joyaux et les morceaux de chair de ses rivaux. Cet homme s'envola avec sa fortune vers une île lointaine pour financer une jeunesse éternelle. Son nom ? C'était le père de Peter Pan.",
@@ -30,19 +50,9 @@ st.markdown("### *Sous-titres*")
 st.markdown("<p style='text-align:center; font-style:italic;'>Un concept initié par vous et les auteurs de l'infini</p>", unsafe_allow_html=True)
 st.write("---")
 
+# --- CONSTRUCTION DU MENU ---
 navigation = list(PAGES_FIXES.keys())
-if st.session_state.community_pages:
-    for i, p in enumerate(st.session_state.community_pages):
-        navigation.insert(-1, f"Feuillet ∞ (par {p['auteur']})")
+for p in pages_commune:
+    navigation.insert(-1, f"Feuillet ∞ : {p['titre']} (par {p['auteur']})")
 
-choix = st.selectbox("Feuilleter le manuscrit ouvert :", navigation)
-st.write("")
-
-if choix in PAGES_FIXES:
-    st.markdown(f"<div class='book-text'>{PAGES_FIXES[choix]}</div>", unsafe_allow_html=True)
-    st.markdown("<div class='page-number'>PAGE ∞</div>", unsafe_allow_html=True)
-else:
-    idx = [opt for opt in navigation if opt.startswith("Feuillet ∞ (par")].index(choix)
-    page_c = st.session_state.community_pages[idx]
-    st.markdown(f"<div class='book-text'>{page_c['texte']}</div>", unsafe_allow_html=True)
 
