@@ -2,10 +2,8 @@ import streamlit as st
 import json
 import os
 
-# 1. CONFIGURATION DE LA PAGE
 st.set_page_config(page_title="Écrire un livres", page_icon="∞", layout="centered")
 
-# 2. STYLE VISUEL MINIMALISTE
 st.markdown("""
     <style>
     .stApp { background-color: #FFFFFF; color: #111111; font-family: 'Georgia', serif; }
@@ -15,7 +13,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 3. GESTION DE LA BASE DE DONNÉES LOCALE
 DB_FILE = "infini_data.json"
 
 def charger_pages_communaute():
@@ -35,7 +32,6 @@ def sauvegarder_page_communaute(titre, auteur, texte):
 
 pages_commune = charger_pages_communaute()
 
-# 4. LES FEUILLETS FIXES ORIGINAUX
 PAGES_FIXES = {
     "Feuillet ∞ (La pluie inversée)": "Il est scientifiquement prouvé que les pingouins du Groenland ne portent jamais de chapeau haut-de-forme le mardi après-midi. C’est une question de dignité protocolaire. Barnabé, le grille-pain connecté de la cuisine du ministère des Affaires Étranges, l’avait pourtant bien spécifié dans sa note de service du 14 octobre. Mais personne ne l'écoute jamais, sous prétexte qu’il brûle systématiquement les tartines de seigle.\n\nCe matin-là, la pluie tombait de bas en haut, ce qui compliquait singulièrement l'usage des parapluies. Le Premier Ministre, un homme d'âge mûr entièrement constitué de nouilles de riz instantanées, prit une grande décision : il décréta que le bleu azur serait désormais interdit le long des trottoirs de plus de trois mètres. La foule, massée devant le perron en agitant des poireaux en signe de protestation, hurla au scandale. Un canard en plastique géant traversa la place en trottinette. C'était le signal que tout le monde",
     "Feuillet ∞ (La récolte)": "attendait pour commencer la grande récolte des boutons de manchette en caoutchouc.",
@@ -52,7 +48,12 @@ st.markdown("### *Sous-titres*")
 st.markdown("<p style='text-align:center; font-style:italic;'>Un concept initié par vous et les auteurs de l'infini</p>", unsafe_allow_html=True)
 st.write("---")
 
-# 5. CONSTRUCTION DU MENU DE NAVIGATION DYNAMIQUE
 navigation = list(PAGES_FIXES.keys())
 for p in pages_commune:
+    navigation.insert(-1, f"Feuillet ∞ : {p['titre']} (par {p['auteur']})")
+
+choix = st.selectbox("Feuilleter le manuscrit ouvert :", navigation)
+st.write("")
+
+if choix in PAGES_FIXES:
 
