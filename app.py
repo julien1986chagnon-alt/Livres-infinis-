@@ -76,6 +76,6 @@ st.write("---")
 # 6. NAVIGATION DANS LE LIVRE (LIVRE EN KIT)
 options_navigation = list(PAGES_FIXES.keys())
 
-# Insérer les pages communautaires juste avant le dernier feuillet de Barnabé
+# Insérer les pages de la communauté juste avant le dernier feuillet de Barnabé
 if st.session_state.community_pages:
 
