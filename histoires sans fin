@@ -36,7 +36,6 @@ st.markdown("""
 """, unsafe_allowed_headers=True)
 
 # --- INITIALISATION DE LA BASE DE DONNÉES TEMPORAIRE ---
-# Utilisation de la session Streamlit pour stocker les pages des utilisateurs pendant leur navigation
 if "community_pages" not in st.session_state:
     st.session_state.community_pages = []
 
@@ -44,7 +43,7 @@ if "community_pages" not in st.session_state:
 PAGES_FIXES = {
     "Page 1 (Ouverture farfelue)": {
         "num": "PAGE ∞",
-        "texte": "Il est scientifiquement prouvé que les pingouins du Groenland ne portent jamais de chapeau haut-de-forme le mardi après-midi. C’est une question de dignité protocolaire. Barnabé, le grille-pain connecté de la cuisine du ministère des Affaires Étranges, l’avait pourtant bien spécifié dans sa note de service du 14 octobre. Mais personne ne l'écoute jamais, sous prétexte qu’il brûle systématiquement les tartines de seigle.\n\nCe matin-là, la pluie tombait de bas en haut, ce qui compliquait singulièrement l'usage des parapluies. Le Premier Ministre, un homme d'âge mûr entièrement constitué de nouilles de riz instantanées, prit une grande décision : il décréta que le bleu azur serait désormais interdit le long des trottoirs de plus de trois mètres. La foule, massée devant le perron en agitant des poireaux en signe de protestation, hurla au scandale. Un canard en plastique géant traversa la place en trottinette. C'était le signal que tout le monde"
+        "texte": "Il est scientifiquement prouvé que les pingouins du Groenland ne portent jamais de chapeau haut-de-forme le mardi après-midi. C’est une question de dignité protocolaire. Barnabé, le grille-pain connecté de la cuisine du ministère des Affaires Étranges, l’avait pourtant bien spécifié dans sa note de service du 14 octobre. Mais personne ne l'écoute jamais, sous prétexte qu’il brûle systématiquement les tartines de seigle.\n\nCe matin-là, la pluie tombait de bas en haut, ce qui compliquait singulièrement l'usage des parapluies. Le Premier Ministre, un homme d'âge mûr entièrement constitué de nouilles de riz instantanées, prit une grande décision : il décréta que le bleu azur serait désormais interdit le long des trottoirs de plus de trois mètres. La foule, massée devant le perron en agitant des poireaux en signe de protestation, hurla au scandal. Un canard en plastique géant traversa la place en trottinette. C'était le signal que tout le monde"
     },
     "Page 2 (Fin des boutons)": {
         "num": "PAGE ∞",
@@ -52,7 +51,7 @@ PAGES_FIXES = {
     },
     "Page 3 (Anomalie Alpha)": {
         "num": "PAGE ∞",
-        "texte": "Ce que le Premier Ministre en nouilles de riz ignorait, alors qu'il contemplait la foule et sa pluie inversée, c'est que son bureau n'était plus tout à fait en Angleterre. Les rapports scientifiques de l'Amirauté britannique avaient longtemps classé ce phénomène sous le code « Anomalie Alpha ». Dans le Triangle des Bermudes, la météo ne répond plus aux lois de Newton. L'océan ne reçoit pas l'eau du ciel ; c'est le ciel qui aspire l'Atlantique. Les gouttes de pluie naissent à la surface des vagues et fusent vers les nuages à une vitesse vertigineuse, créant des colonnes liquides ascendantes. C'est ce vortex de gravité inversée qui a saisi le HMS Vanguard d'Arthur Pan en 1782. Le navire n'a pas coulé : il a été soulevé par une pluie inversée, grimpant le long des gouttes d'eau jusqu'à franchir la membrane invisible qui sépare notre réalité du Pays Imaginaire. Quiconque traverse cette pluie de bas en haut cesse de vieillir, mais perd sa boussole à jamais."
+        "texte": "Ce que le Premier Ministre en nouilles de riz ignorait, alors qu'il contemplait la foule et sa pluie inversée, c'est que son bureau n'était plus tout à fait en Angleterre. Les rapports scientifiques de l'Amirauté britannique avaient longtemps classé ce phénomène sous le code « Anomalie Alpha ». Dans le Triangle des Bermudes, la météo ne répond plus aux lois de Newton. L'océan ne reçoit pas l'eau du ciel ; c'est le ciel qui aspiration l'Atlantique. Les gouttes de pluie naissent à la surface des vagues et fusent vers les nuages à une vitesse vertigineuse, créant des colonnes liquides ascendantes. C'est ce vortex de gravité inversée qui a saisi le HMS Vanguard d'Arthur Pan en 1782. Le navire n'a pas coulé : il a été soulevé par une pluie inversée, grimpant le long des gouttes d'eau jusqu'à franchir la membrane invisible qui sépare notre réalité du Pays Imaginaire. Quiconque traverse cette pluie de bas en haut cesse de vieillir, mais perd sa boussole à jamais."
     },
     "Page 4 (L'Europe en feu)": {
         "num": "PAGE ∞",
@@ -79,4 +78,8 @@ PAGES_FIXES = {
 # --- EN-TÊTE DE LA COUVERTURE ---
 st.title("Écrire un livres")
 st.markdown("### *Sous-titres*")
+st.markdown("<p style='text-align:center; font-style:italic;'>Un concept initié par vous et les auteurs de l'infini</p>", unsafe_allowed_headers=True)
+st.write("---")
+
+# --- NAVIGATION DANS LE LIVRE ---
 
