@@ -1,13 +1,13 @@
 import streamlit as st
 
-# --- CONFIGURATION DE LA PAGE ---
+# 1. CONFIGURATION DE LA PAGE
 st.set_page_config(
     page_title="Écrire un livres",
     page_icon="∞",
     layout="centered"
 )
 
-# --- STYLE VISUEL MINIMALISTE (Style papier imprimé) ---
+# 2. STYLE VISUEL MINIMALISTE (Style papier imprimé)
 st.markdown("""
     <style>
     .stApp {
@@ -33,13 +33,13 @@ st.markdown("""
         font-size: 1.1rem;
     }
     </style>
-""", unsafe_allowed_headers=True)
+""", unsafe_allow_html=True)
 
-# --- INITIALISATION DE LA BASE DE DONNÉES TEMPORAIRE ---
+# 3. INITIALISATION DE LA BASE DE DONNÉES TEMPORAIRE
 if "community_pages" not in st.session_state:
     st.session_state.community_pages = []
 
-# --- LES PAGES FIXES DU LIVRE ---
+# 4. LES PAGES FIXES DU LIVRE
 PAGES_FIXES = {
     "Page 1 (Ouverture farfelue)": {
         "num": "PAGE ∞",
@@ -75,11 +75,13 @@ PAGES_FIXES = {
     }
 }
 
-# --- EN-TÊTE DE LA COUVERTURE ---
+# 5. EN-TÊTE DE LA COUVERTURE
 st.title("Écrire un livres")
 st.markdown("### *Sous-titres*")
-st.markdown("<p style='text-align:center; font-style:italic;'>Un concept initié par vous et les auteurs de l'infini</p>", unsafe_allowed_headers=True)
+st.markdown("<p style='text-align:center; font-style:italic;'>Un concept initié par vous et les auteurs de l'infini</p>", unsafe_allow_html=True)
 st.write("---")
 
-# --- NAVIGATION DANS LE LIVRE ---
+# 6. NAVIGATION DANS LE LIVRE
+options_navigation = list(PAGES_FIXES.keys())
+
 
