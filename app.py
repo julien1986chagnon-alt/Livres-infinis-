@@ -42,7 +42,7 @@ PAGES_FIXES = {
 }
 
 st.title("Les vérités de peter pan")
-st.markdown("### *L'envers ùécanique du pays imaginaire*")
+st.markdown("### *L'envers mécanique du pays imaginaire*")
 st.markdown("<p style='text-align:center; font-style:italic;'>Un concept initié par vous et les auteurs de l'infini</p>", unsafe_allow_html=True)
 st.write("---")
 
