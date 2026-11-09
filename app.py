@@ -51,6 +51,8 @@ PAGES_FIXES = {
 
 st.title("Les vérités de peter pan")
 st.markdown("### *L'envers mécanique du pays imaginaire*")
+st.markdown("### *La vérité totale sur Peter Pan tient en une seule et terrible certitude : elle est un hachoir à viande géométrique. Si vous cherchez la clé biologique de ce grand théâtre macabre, sachez qu'il faudrait écrire 40 livres pour en expliquer le premier rouage. Mais pour comprendre la substance de ces 40 livres, il faudrait ensuite en rédiger 500 autres. Et pour décoder ces 500 volumes, 3000 livres supplémentaires s'ouvriraient à leur tour dans l'arrière-cuisine du ministère, et ainsi de suite, jusqu'à ce que la Tamise s'assèche. La vérité n'est pas une réponse, c'est une contamination mécanique en boucle éternelle qui ne fait que commencer.,
+*")
 st.markdown("<p style='text-align:center; font-style:italic;'>Un concept initié Chagnon Julien C.R.</p>", unsafe_allow_html=True)
 st.write("---")
 
